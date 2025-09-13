@@ -8,27 +8,93 @@
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f9;
-      text-align: center;
-      padding: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-    h1 {
-      color: #333;
-    }
-    .box {
-      margin: 20px auto;
-      padding: 20px;
+    .chat-container {
+      width: 100%;
+      max-width: 500px;
       background: white;
-      border-radius: 8px;
-      width: 300px;
+      border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ddd;
+    }
+    .chat-messages p {
+      background: #f1f1f1;
+      padding: 8px 12px;
+      border-radius: 5px;
+      margin: 5px 0;
+      max-width: 70%;
+    }
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background: #fafafa;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+    }
+    .chat-input button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .chat-input button:hover {
+      background: #45a049;
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>507 Chat App 🚀</h1>
-    <p>歡迎來到聊天網站！</p>
-    <p>(這是 Netlify 前端頁面，後端還沒接上)</p>
+  <div class="chat-container">
+    <div class="chat-header">507 Chat App 🚀</div>
+    <div class="chat-messages" id="chat-messages">
+      <p>👋 歡迎進入聊天室！</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chat-input" placeholder="輸入訊息..." />
+      <button onclick="sendMessage()">送出</button>
+    </div>
   </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("chat-input");
+      const messages = document.getElementById("chat-messages");
+
+      if (input.value.trim() !== "") {
+        const newMsg = document.createElement("p");
+        newMsg.textContent = "🧑 你: " + input.value;
+        messages.appendChild(newMsg);
+        input.value = "";
+        messages.scrollTop = messages.scrollHeight; // 滾到底
+      }
+    }
+  </script>
 </body>
 </html>
